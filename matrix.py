@@ -64,3 +64,39 @@ def opositMatrix(matrix, n):
                 minorMatrix = minor(matrix, n, i, j)
                 oposit[i][j] = (-1) ** (i + j) * deter(minorMatrix, n - 1)
         return oposit #нужно
+
+
+def rank(matrix):
+    # Function to perform Gaussian elimination
+    def gaussian_elimination(matrix):
+        rows, cols = len(matrix), len(matrix[0])
+
+        for pivot_row in range(min(rows, cols)):
+            # Find the pivot element
+            pivot = matrix[pivot_row][pivot_row]
+
+            # If pivot is zero, swap with a non-zero row below
+            if pivot == 0:
+                for i in range(pivot_row + 1, rows):
+                    if matrix[i][pivot_row] != 0:
+                        matrix[pivot_row], matrix[i] = matrix[i], matrix[pivot_row]
+                        break
+                    # If no non-zero pivot is found, move to the next column
+                    if i == rows - 1:
+                        pivot_row += 1
+
+            # Reduce the rows below the pivot row
+            for i in range(pivot_row + 1, rows):
+                ratio = matrix[i][pivot_row] / pivot
+                for j in range(cols):
+                    matrix[i][j] -= ratio * matrix[pivot_row][j]
+
+        return matrix
+
+    # Perform Gaussian elimination on the matrix
+    reduced_matrix = gaussian_elimination([row.copy() for row in matrix])
+
+    # Count non-zero rows, which gives the rank of the matrix
+    rank = sum(1 for row in reduced_matrix if any(row))
+
+    return rank
