@@ -1,6 +1,5 @@
 import random
 
-import numpy as np
 from kivy.app import App
 from kivy.core.window import Window
 from kivy.properties import ObjectProperty
@@ -298,7 +297,7 @@ class MyGridLayout(GridLayout):
     def rank(self, event):
         try:
             matrix = self.get_matrix()
-            rank = f'{np.linalg.matrix_rank(matrix)}'
+            rank = mtx.rank(matrix)
         except:
             rank = 'Не найден!'
         self.show_the_result(rank, 'Ранг матрицы:', 50, 500)
