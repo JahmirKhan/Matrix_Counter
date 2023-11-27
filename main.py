@@ -21,7 +21,6 @@ class MyInputMatrix(GridLayout):
         super(MyInputMatrix, self).__init__(**kwargs)
         self.cols = 1
 
-
         self.result_matrix = GridLayout(
             spacing=3,
             size_hint=(1, 1),
@@ -56,7 +55,6 @@ class MyInputMatrix(GridLayout):
         self.add_widget(self.ishod)
         self.add_widget(self.input_matrix)
 
-
 #Основная программа, в которой создаются все кнопки, и их методы
 class MyGridLayout(GridLayout):
 
@@ -79,7 +77,6 @@ class MyGridLayout(GridLayout):
         self.calc_grid = GridLayout(cols=2, size_hint=(0.5, 0.5), padding=5,spacing=2)
         self.det_grid = GridLayout(cols=2, size_hint=(0.5, 0.5), padding=5,spacing=2)
 
-
         self.add_button('уменьшить i', self.change_size_down_row,self.change_size_row)
         self.add_button('увеличить i', self.change_size_up_row,self.change_size_col)
         self.add_button('уменьшить j', self.change_size_down_col,self.change_size_row)
@@ -96,7 +93,6 @@ class MyGridLayout(GridLayout):
         self.add_button('Сделать квадратную матрицу', self.square, self.help_grid,)
         self.add_button('Автоматически заполнить',self.auto,self.help_grid,)
         self.add_button('Очистить',self.clear,self.help_grid,)
-
 
         self.buttons.add_widget(self.help_grid)
         self.det_grid.add_widget(
@@ -179,11 +175,9 @@ class MyGridLayout(GridLayout):
         try:
             self.remove_widget(self.matrix_input)
             self.remove_widget(self.buttons)
-            self.remove_widget(self.det_label)
-
             self.matrix_input = MyInputMatrix(self.size_mtx_col,self.size_mtx_row)
+
             self.add_widget(self.matrix_input)
-            self.add_widget(self.det_label)
             self.add_widget(self.buttons)
 
         except:
@@ -355,8 +349,6 @@ class MyGridLayout(GridLayout):
         self.matrix_input.ishod.text = f'Матрица А размером {size_row}х{size_col}:'
         self.change_size()
 
-
-
 class MyMatrixCalc(App):
     def build(self):
         Window.size = (540, 1200)
@@ -368,8 +360,6 @@ class MyMatrixCalc(App):
         # background_color = [.92, .35, .36, 1]
 
         return MyGridLayout()
-
-
 
 if __name__ == '__main__':
     MyMatrixCalc().run()
